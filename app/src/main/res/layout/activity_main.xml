@@ -5,29 +5,5 @@
     android:padding="16dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/data_TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="No data" />
 
-    <Button
-        android:id="@+id/receive_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get data" />
-
-    <EditText
-        android:id="@+id/data_EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Put data here" />
-
-    <Button
-        android:id="@+id/send_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save data" />
 </LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/modelFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.ModelFragment"
+        android:label="fragment_model"
+        tools:layout="@layout/fragment_model" />
+    <fragment
+        android:id="@+id/criteriaFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.CriteriaFragment"
+        android:label="fragment_criteria"
+        tools:layout="@layout/fragment_criteria" />
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.GraphFragment"
+        android:label="fragment_graph"
+        tools:layout="@layout/fragment_graph" />
+    <fragment
+        android:id="@+id/modelRegistrationFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.ModelRegistrationFragment"
+        android:label="fragment_model_registration"
+        tools:layout="@layout/fragment_model_registration" />
+</navigation>
