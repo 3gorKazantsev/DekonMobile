@@ -7,27 +7,42 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.LoginFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_modelListFragment"
+            app:destination="@id/modelListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/modelFragment"
-        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.ModelFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelFragment"
         android:label="fragment_model"
-        tools:layout="@layout/fragment_model" />
-    <fragment
-        android:id="@+id/criteriaFragment"
-        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.CriteriaFragment"
-        android:label="fragment_criteria"
-        tools:layout="@layout/fragment_criteria" />
+        tools:layout="@layout/fragment_model" >
+        <action
+            android:id="@+id/action_modelFragment_to_modelRegistrationFragment"
+            app:destination="@id/modelRegistrationFragment" />
+        <action
+            android:id="@+id/action_modelFragment_to_graphFragment"
+            app:destination="@id/graphFragment" />
+    </fragment>
     <fragment
         android:id="@+id/graphFragment"
-        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.GraphFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.GraphFragment"
         android:label="fragment_graph"
         tools:layout="@layout/fragment_graph" />
     <fragment
         android:id="@+id/modelRegistrationFragment"
-        android:name="org.egorkazantsev.dekonmobile.presentation.fragment.ModelRegistrationFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelRegistrationFragment"
         android:label="fragment_model_registration"
         tools:layout="@layout/fragment_model_registration" />
+    <fragment
+        android:id="@+id/modelListFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelListFragment"
+        android:label="fragment_model_list"
+        tools:layout="@layout/fragment_model_list" >
+        <action
+            android:id="@+id/action_modelListFragment_to_modelFragment"
+            app:destination="@id/modelFragment" />
+    </fragment>
 </navigation>

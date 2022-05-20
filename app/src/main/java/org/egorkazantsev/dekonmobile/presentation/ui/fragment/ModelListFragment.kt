@@ -1,4 +1,4 @@
-package org.egorkazantsev.dekonmobile.presentation.fragment
+package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import org.egorkazantsev.dekonmobile.R
 
-class ModelFragment : Fragment() {
+class ModelListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_model, container, false)
+        return inflater.inflate(R.layout.fragment_model_list, container, false)
     }
 }

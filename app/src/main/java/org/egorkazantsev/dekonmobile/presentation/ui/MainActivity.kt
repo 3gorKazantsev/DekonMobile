@@ -1,4 +1,4 @@
-package org.egorkazantsev.dekonmobile.presentation
+package org.egorkazantsev.dekonmobile.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
