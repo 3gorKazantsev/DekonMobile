@@ -5,4 +5,12 @@
     <string name="username">Имя пользователя</string>
     <string name="password">Пароль</string>
     <string name="log_in">Войти</string>
+    <string name="name">Название</string>
+    <string name="purpose">Назначение</string>
+    <string name="organization">Организация</string>
+    <string name="inn">ИНН</string>
+    <string name="ogrn">ОГРН</string>
+    <string name="kpp">КПП</string>
+    <string name="kio">КИО</string>
+    <string name="full_name">ФИО</string>
 </resources>

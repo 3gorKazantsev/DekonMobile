@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DekonMobile"
 include ':app'
+include ':domain'
+include ':data'
