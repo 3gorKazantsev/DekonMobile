@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.egorkazantsev.dekonmobile.domain.model.Model
-import org.egorkazantsev.dekonmobile.domain.usecase.GetAllModelsUseCase
+import org.egorkazantsev.dekonmobile.domain.usecase.GetAllModelsUC
 import javax.inject.Inject
 
 @HiltViewModel
 class ModelListViewModel @Inject constructor(
-    private val getAllModelsUseCase: GetAllModelsUseCase
+    private val getAllModelsUC: GetAllModelsUC
 ): ViewModel() {
 
     private val _modelListLiveData = MutableLiveData<List<Model>>()
@@ -21,7 +21,7 @@ class ModelListViewModel @Inject constructor(
     }
 
     fun getAllModels() {
-        val modelList = getAllModelsUseCase.execute()
+        val modelList = getAllModelsUC.execute()
         _modelListLiveData.value = modelList
     }
 }
