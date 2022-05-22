@@ -6,31 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.egorkazantsev.dekonmobile.databinding.ModelItemBinding
 import org.egorkazantsev.dekonmobile.domain.model.Model
+import java.util.*
 
 class ModelListAdapter(
-    private val modelList: List<Model>,
+    private val models: List<Model>,
     private val onItemClickListener: OnItemClickListener
-) : RecyclerView.Adapter<ModelListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ModelListAdapter.ModelViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ModelItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent, false
-            )
-        )
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val model = modelList[position]
-        with(holder.binding) {
-            modelNameTextView.text = model.name
-        }
-    }
-
-    override fun getItemCount() = modelList.size
-
-    inner class ViewHolder(
+    inner class ModelViewHolder(
         val binding: ModelItemBinding
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -38,14 +21,36 @@ class ModelListAdapter(
             binding.root.setOnClickListener(this)
         }
 
+        // биндинг всех UI компонентов
+        fun bind(model: Model) {
+            with(binding) {
+                modelNameTextView.text = model.name
+            }
+        }
+
         override fun onClick(view: View?) {
             val position = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION)
-                onItemClickListener.onItemClick(position)
+                onItemClickListener.onItemClick(models[position].id)
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder {
+        return ModelViewHolder(
+            ModelItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent, false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: ModelViewHolder, position: Int) {
+        holder.bind(models[position])
+    }
+
+    override fun getItemCount() = models.size
+
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(id: UUID)
     }
 }

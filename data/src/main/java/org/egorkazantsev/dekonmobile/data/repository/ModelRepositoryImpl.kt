@@ -11,35 +11,39 @@ class ModelRepositoryImpl : ModelRepository {
     override fun getModelList(): List<Model> {
         return listOf(
             Model(
-                UUID.randomUUID(), "model 2 crt",
+                UUID.fromString("e015cd30-f085-49d8-b186-3475d86f1e2d"), "model 2 crt",
                 Matrix(
-                    UUID.randomUUID(), "main matrix", 2.4,
+                    UUID.randomUUID(), "main matrix", 2.4, 0, 1,
                     leftElement = Criteria(
-                        UUID.randomUUID(), "crt 1",1.9
+                        UUID.randomUUID(), "crt 1", 1.9, 1, 1
                     ),
                     rightElement = Criteria(
-                        UUID.randomUUID(), "crt 2", 2.1
+                        UUID.randomUUID(), "crt 2", 2.1, 1, 1,
                     )
-                )
+                ), 1
             ),
             Model(
-                UUID.randomUUID(), "model 1 mtr 3 crt",
+                UUID.fromString("765ad7c9-05aa-4a71-a76a-003298ad4b81"), "model 1 mtr 3 crt",
                 Matrix(
-                    UUID.randomUUID(), "main matrix", 2.4,
+                    UUID.randomUUID(), "main matrix", 2.4, 0, 1,
                     leftElement = Criteria(
-                        UUID.randomUUID(), "crt 1",1.9
+                        UUID.randomUUID(), "crt 1", 1.9, 1, 1
                     ),
                     rightElement = Matrix(
-                        UUID.randomUUID(), "mtr 1", 2.1,
+                        UUID.randomUUID(), "mtr 1", 2.1, 1, 1,
                         leftElement = Criteria(
-                            UUID.randomUUID(), "crt 2", 1.1
+                            UUID.randomUUID(), "crt 2", 1.1, 2, 1
                         ),
                         rightElement = Criteria(
-                            UUID.randomUUID(), "crt 3", 1.4
+                            UUID.randomUUID(), "crt 3", 1.4, 2, 1
                         )
                     )
-                )
+                ), 2
             )
         )
+    }
+
+    override fun getModelById(id: UUID): Model {
+        return getModelList()[0]
     }
 }

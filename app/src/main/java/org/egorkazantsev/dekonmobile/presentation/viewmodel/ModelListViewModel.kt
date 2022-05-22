@@ -17,10 +17,10 @@ class ModelListViewModel @Inject constructor(
     val modelListLiveData: LiveData<List<Model>> = _modelListLiveData
 
     init {
-        getAllModels()
+        loadAllModels()
     }
 
-    fun getAllModels() {
+    private fun loadAllModels() {
         val modelList = getAllModelsUC.execute()
         _modelListLiveData.value = modelList
     }

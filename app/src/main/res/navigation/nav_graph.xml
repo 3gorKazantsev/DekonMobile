@@ -16,15 +16,18 @@
     </fragment>
     <fragment
         android:id="@+id/modelFragment"
-        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelFragment"
+        android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelDetailFragment"
         android:label="fragment_model"
-        tools:layout="@layout/fragment_model" >
+        tools:layout="@layout/fragment_model_detail" >
         <action
             android:id="@+id/action_modelFragment_to_modelRegistrationFragment"
             app:destination="@id/modelRegistrationFragment" />
         <action
             android:id="@+id/action_modelFragment_to_graphFragment"
             app:destination="@id/graphFragment" />
+        <argument
+            android:name="modelId"
+            app:argType="java.util.UUID" />
     </fragment>
     <fragment
         android:id="@+id/graphFragment"

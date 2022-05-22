@@ -1,0 +1,85 @@
+package org.egorkazantsev.dekonmobile.presentation.ui.adapter
+
+import android.graphics.Color
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import org.egorkazantsev.dekonmobile.databinding.CriteriaItemBinding
+import org.egorkazantsev.dekonmobile.databinding.MatrixItemBinding
+import org.egorkazantsev.dekonmobile.domain.model.BaseElement
+import org.egorkazantsev.dekonmobile.domain.model.Criteria
+import org.egorkazantsev.dekonmobile.domain.model.Matrix
+
+private const val MATRIX_VIEW_TYPE = 0
+private const val CRITERIA_VIEW_TYPE = 1
+
+class ModelDetailAdapter(
+    private val elements: List<BaseElement>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    inner class MatrixViewHolder(
+        val binding: MatrixItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        // биндинг всех UI компонентов
+        fun bind(matrix: Matrix) {
+            with(binding) {
+                matrixNameTextView.text = matrix.name
+                matrixValueTextView.text = matrix.value.toString()
+
+                // TODO сделать цвета у элементов
+                elementColorCardView.setCardBackgroundColor(Color.GREEN)
+            }
+        }
+    }
+
+    inner class CriteriaViewHolder(
+        val binding: CriteriaItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        // биндинг всех UI компонентов
+        fun bind(criteria: Criteria) {
+            with(binding) {
+                criteriaNameTextView.text = criteria.name
+                criteriaValueTextView.text = criteria.value.toString()
+                // TODO повесить слушательно, но реализацию сделать выше
+                editValueImageButton.setOnClickListener(null)
+
+                // TODO сделать цвета у элементов
+                elementColorCardView.setCardBackgroundColor(Color.GREEN)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (elements[position] is Matrix)
+            MATRIX_VIEW_TYPE
+        else
+            CRITERIA_VIEW_TYPE
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == MATRIX_VIEW_TYPE)
+            MatrixViewHolder(
+                MatrixItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent, false
+                )
+            )
+        else
+            CriteriaViewHolder(
+                CriteriaItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent, false
+                )
+            )
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (getItemViewType(position) == MATRIX_VIEW_TYPE)
+            (holder as MatrixViewHolder).bind(elements[position] as Matrix)
+        else
+            (holder as CriteriaViewHolder).bind(elements[position] as Criteria)
+    }
+
+    override fun getItemCount() = elements.size
+
+}

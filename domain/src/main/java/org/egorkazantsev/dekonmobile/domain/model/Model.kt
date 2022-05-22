@@ -5,7 +5,8 @@ import java.util.*
 data class Model(
     val id: UUID,
     val name: String,
-    val matrix: Matrix
+    val matrix: Matrix,
+    val maxLevel: Int
 ) {
     val elements: List<BaseElement> = decompose()
 

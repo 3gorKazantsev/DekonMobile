@@ -10,8 +10,10 @@
     <TextView
         android:id="@+id/modelName_TextView"
         android:textSize="22sp"
+        android:paddingHorizontal="4dp"
         android:layout_margin="4dp"
-        tools:text="model name"
+        tools:text="Название модели"
+        android:textColor="@color/dark_grey"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

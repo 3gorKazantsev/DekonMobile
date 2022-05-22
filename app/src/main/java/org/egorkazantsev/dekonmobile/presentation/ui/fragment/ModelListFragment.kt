@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentModelListBinding
 import org.egorkazantsev.dekonmobile.presentation.ui.adapter.ModelListAdapter
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.ModelListViewModel
+import java.util.*
 
 @AndroidEntryPoint
 class ModelListFragment : Fragment(), ModelListAdapter.OnItemClickListener {
@@ -31,13 +33,10 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnItemClickListener {
         return binding.root
     }
 
-    override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.action_modelListFragment_to_modelFragment)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // настройка RecyclerView
         with(binding) {
             modelListRecyclerView.apply {
                 adapter = viewModel.modelListLiveData.value?.let {
@@ -46,6 +45,12 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnItemClickListener {
                 layoutManager = LinearLayoutManager(activity)
             }
         }
+    }
+
+    // клик по элементу в RecyclerView
+    override fun onItemClick(id: UUID) {
+        val action = ModelListFragmentDirections.actionModelListFragmentToModelFragment(id)
+        findNavController().navigate(action)
     }
 
     override fun onDestroy() {
