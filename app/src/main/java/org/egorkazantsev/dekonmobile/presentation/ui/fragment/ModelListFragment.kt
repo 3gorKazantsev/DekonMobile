@@ -8,17 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import org.egorkazantsev.dekonmobile.R
-import org.egorkazantsev.dekonmobile.data.repository.ModelRepositoryImpl
-import org.egorkazantsev.dekonmobile.databinding.FragmentLoginBinding
 import org.egorkazantsev.dekonmobile.databinding.FragmentModelListBinding
-import org.egorkazantsev.dekonmobile.presentation.adapter.ModelListAdapter
+import org.egorkazantsev.dekonmobile.presentation.ui.adapter.ModelListAdapter
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.ModelListViewModel
 
 @AndroidEntryPoint
-class ModelListFragment : Fragment() {
+class ModelListFragment : Fragment(), ModelListAdapter.OnItemClickListener {
 
     private var _binding: FragmentModelListBinding? = null
     private val binding get() = _binding!!
@@ -34,13 +31,18 @@ class ModelListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onItemClick(position: Int) {
+        findNavController().navigate(R.id.action_modelListFragment_to_modelFragment)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
             modelListRecyclerView.apply {
-                viewModel.getAllModels()
-                adapter = viewModel.modelListLiveData.value?.let { ModelListAdapter(it) }
+                adapter = viewModel.modelListLiveData.value?.let {
+                    ModelListAdapter(it, this@ModelListFragment)
+                }
                 layoutManager = LinearLayoutManager(activity)
             }
         }

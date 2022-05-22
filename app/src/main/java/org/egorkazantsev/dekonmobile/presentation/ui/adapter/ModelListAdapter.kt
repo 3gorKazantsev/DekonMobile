@@ -1,12 +1,16 @@
-package org.egorkazantsev.dekonmobile.presentation.adapter
+package org.egorkazantsev.dekonmobile.presentation.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.egorkazantsev.dekonmobile.databinding.ModelItemBinding
 import org.egorkazantsev.dekonmobile.domain.model.Model
 
-class ModelListAdapter(val modelList: List<Model>) : RecyclerView.Adapter<ModelListAdapter.ViewHolder>() {
+class ModelListAdapter(
+    private val modelList: List<Model>,
+    private val onItemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<ModelListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -26,7 +30,22 @@ class ModelListAdapter(val modelList: List<Model>) : RecyclerView.Adapter<ModelL
 
     override fun getItemCount() = modelList.size
 
-    class ViewHolder(
+    inner class ViewHolder(
         val binding: ModelItemBinding
-    ) : RecyclerView.ViewHolder(binding.root)
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            val position = bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION)
+                onItemClickListener.onItemClick(position)
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
 }
