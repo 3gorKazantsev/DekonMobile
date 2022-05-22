@@ -1,4 +1,4 @@
-package org.egorkazantsev.dekonmobile.presentation.di
+package org.egorkazantsev.dekonmobile.di
 
 import dagger.Module
 import dagger.Provides

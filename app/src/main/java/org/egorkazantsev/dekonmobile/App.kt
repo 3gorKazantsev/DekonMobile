@@ -1,4 +1,4 @@
-package org.egorkazantsev.dekonmobile.presentation
+package org.egorkazantsev.dekonmobile
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
