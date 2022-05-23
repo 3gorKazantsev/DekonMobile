@@ -3,6 +3,7 @@ package org.egorkazantsev.dekonmobile.data.repository
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Matrix
 import org.egorkazantsev.dekonmobile.domain.model.Model
+import org.egorkazantsev.dekonmobile.domain.model.Owner
 import org.egorkazantsev.dekonmobile.domain.repository.ModelRepository
 import java.util.*
 
@@ -12,6 +13,7 @@ class ModelRepositoryImpl : ModelRepository {
         return listOf(
             Model(
                 UUID.fromString("e015cd30-f085-49d8-b186-3475d86f1e2d"), "model 2 crt",
+                Owner(UUID.randomUUID(), "Зарплатин Пупа Лупович"),
                 Matrix(
                     UUID.randomUUID(), "main matrix", 2.4,
                     leftElement = Criteria(
@@ -24,6 +26,7 @@ class ModelRepositoryImpl : ModelRepository {
             ),
             Model(
                 UUID.fromString("765ad7c9-05aa-4a71-a76a-003298ad4b81"), "model 1 mtr 3 crt",
+                Owner(UUID.randomUUID(), "Зубенко Михаил Петрович"),
                 Matrix(
                     UUID.randomUUID(), "main matrix", 2.4,
                     leftElement = Criteria(
@@ -44,6 +47,6 @@ class ModelRepositoryImpl : ModelRepository {
     }
 
     override fun getModelById(id: UUID): Model {
-        return getModelList()[1]
+        return getModelList().find { it.id == id }!!
     }
 }

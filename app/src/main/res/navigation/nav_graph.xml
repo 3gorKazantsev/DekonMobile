@@ -33,12 +33,25 @@
         android:id="@+id/graphFragment"
         android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.GraphFragment"
         android:label="fragment_graph"
-        tools:layout="@layout/fragment_graph" />
+        tools:layout="@layout/fragment_graph" >
+        <argument
+            android:name="criteriaId"
+            app:argType="java.util.UUID" />
+        <argument
+            android:name="modelId"
+            app:argType="java.util.UUID" />
+    </fragment>
     <fragment
         android:id="@+id/modelRegistrationFragment"
         android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelRegistrationFragment"
         android:label="fragment_model_registration"
-        tools:layout="@layout/fragment_model_registration" />
+        tools:layout="@layout/fragment_model_registration" >
+        <argument
+            android:name="modelName"
+            app:argType="string" />
+        <argument android:name="ownerName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/modelListFragment"
         android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelListFragment"
