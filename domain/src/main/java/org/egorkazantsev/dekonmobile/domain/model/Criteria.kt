@@ -1,12 +1,14 @@
 package org.egorkazantsev.dekonmobile.domain.model
 
-import java.awt.Color
 import java.util.*
 
-data class Criteria(
-    override val id: UUID,
-    override val name: String,
-    override val value: Double,
-    override val level: Int,
-    override val color: Int
-): BaseElement(id, name, value, level, color)
+open class Criteria(
+    val id: UUID,
+    val name: String,
+    val value: Double,
+    val level: Int
+) {
+    override fun toString(): String {
+        return "\n${this.javaClass.simpleName}(id=$id, name=$name, value=$value, level=$level)"
+    }
+}

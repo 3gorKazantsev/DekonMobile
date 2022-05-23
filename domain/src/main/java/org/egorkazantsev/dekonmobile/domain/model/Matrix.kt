@@ -1,16 +1,37 @@
 package org.egorkazantsev.dekonmobile.domain.model
 
-import java.awt.Color
 import java.util.*
 
-data class Matrix(
-    override val id: UUID,
-    override val name: String,
-    override val value: Double,
-    override val level: Int,
-    override val color: Int,
+class Matrix(
+    id: UUID,
+    name: String,
+    value: Double,
+    level: Int,
+
     val matrixValue: List<List<Int>> =
         List(4) { List(4) { 0 } },
-    val leftElement: BaseElement,
-    val rightElement: BaseElement
-) : BaseElement(id, name, value, level, color)
+    val leftElement: Criteria,
+    val rightElement: Criteria
+) : Criteria(id, name, value, level) {
+
+    fun elements(): List<Criteria> {
+        val elements = mutableListOf<List<Criteria>>(mutableListOf(this))
+
+        if (leftElement is Matrix)
+            elements.add(leftElement.elements())
+        else
+            elements.add(listOf(leftElement))
+
+        if (rightElement is Matrix)
+            elements.add(rightElement.elements())
+        else
+            elements.add(listOf(rightElement))
+
+        return elements.flatten()
+    }
+
+    override fun toString(): String {
+        return "\n${this.javaClass.simpleName}(id=$id, name=$name, value=$value, level=$level, matrixValue=$matrixValue, leftElement=${leftElement.javaClass.simpleName}(name=${leftElement.name}), rightElement=${rightElement.javaClass.simpleName}(name=${rightElement.name}))"
+    }
+
+}
