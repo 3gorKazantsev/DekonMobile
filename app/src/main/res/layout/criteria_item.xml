@@ -25,25 +25,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/criteriaName_textView"
+            android:id="@+id/criteriaValue_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/dark_grey"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/editValue_ImageButton"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2.1" />
 
         <TextView
-            android:id="@+id/criteriaValue_textView"
+            android:id="@+id/criteriaName_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:textColor="@color/dark_grey"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/criteriaName_textView"
+            app:layout_constraintEnd_toStartOf="@+id/editValue_ImageButton"
             app:layout_constraintStart_toEndOf="@+id/elementColor_cardView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Критерий 1" />
@@ -52,8 +52,9 @@
             android:id="@+id/editValue_ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:background="#00FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/criteriaValue_textView"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_edit" />
 

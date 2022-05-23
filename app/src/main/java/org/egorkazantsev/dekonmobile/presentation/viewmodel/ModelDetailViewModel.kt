@@ -1,12 +1,11 @@
 package org.egorkazantsev.dekonmobile.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.egorkazantsev.dekonmobile.domain.model.BaseElement
+import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.usecase.GetModelByIdUC
 import java.util.*
@@ -21,8 +20,8 @@ class ModelDetailViewModel @Inject constructor(
     private val _modelLiveData = MutableLiveData<Model>()
     val modelLiveData: LiveData<Model> = _modelLiveData
 
-    private val _elementsLiveData = MutableLiveData<List<BaseElement>>()
-    val elementsLiveData: LiveData<List<BaseElement>> = _elementsLiveData
+    private val _elementsLiveData = MutableLiveData<List<Criteria>>()
+    val elementsLiveData: LiveData<List<Criteria>> = _elementsLiveData
 
     init {
         // загружаем модель по ID полученному из SafeArgs
@@ -36,6 +35,6 @@ class ModelDetailViewModel @Inject constructor(
     }
 
     private fun getAllElements() {
-        _elementsLiveData.value = modelLiveData.value?.elements
+        _elementsLiveData.value = modelLiveData.value?.matrixRoot?.elements()
     }
 }

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.egorkazantsev.dekonmobile.databinding.CriteriaItemBinding
 import org.egorkazantsev.dekonmobile.databinding.MatrixItemBinding
-import org.egorkazantsev.dekonmobile.domain.model.BaseElement
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Matrix
 
@@ -14,7 +13,7 @@ private const val MATRIX_VIEW_TYPE = 0
 private const val CRITERIA_VIEW_TYPE = 1
 
 class ModelDetailAdapter(
-    private val elements: List<BaseElement>
+    private val elements: List<Criteria>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class MatrixViewHolder(
@@ -77,7 +76,7 @@ class ModelDetailAdapter(
         if (getItemViewType(position) == MATRIX_VIEW_TYPE)
             (holder as MatrixViewHolder).bind(elements[position] as Matrix)
         else
-            (holder as CriteriaViewHolder).bind(elements[position] as Criteria)
+            (holder as CriteriaViewHolder).bind(elements[position])
     }
 
     override fun getItemCount() = elements.size
