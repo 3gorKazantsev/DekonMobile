@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.usecase.GetModelByIdUC
 import java.util.*
@@ -20,9 +19,6 @@ class ModelDetailViewModel @Inject constructor(
     private val _modelLiveData = MutableLiveData<Model>()
     val modelLiveData: LiveData<Model> = _modelLiveData
 
-    private val _elementsLiveData = MutableLiveData<List<Criteria>>()
-    val elementsLiveData: LiveData<List<Criteria>> = _elementsLiveData
-
     init {
         // загружаем модель по ID полученному из SafeArgs
         state.get<UUID>("modelId")?.let { loadModelById(it) }
@@ -31,10 +27,5 @@ class ModelDetailViewModel @Inject constructor(
     private fun loadModelById(id: UUID) {
         val model = getModelById.execute(id)
         _modelLiveData.value = model
-        getAllElements()
-    }
-
-    private fun getAllElements() {
-        _elementsLiveData.value = modelLiveData.value?.matrixRoot?.elements()
     }
 }

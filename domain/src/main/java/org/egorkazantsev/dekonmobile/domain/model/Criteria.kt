@@ -5,9 +5,10 @@ import java.util.*
 open class Criteria(
     val id: UUID,
     val name: String,
-    val value: Double,
-    val level: Int
+    var value: Double
 ) {
+    var level: Int = 0
+
     override fun toString(): String {
         return "\n${this.javaClass.simpleName}(id=$id, name=$name, value=$value, level=$level)"
     }

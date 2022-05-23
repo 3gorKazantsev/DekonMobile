@@ -35,7 +35,7 @@ class ModelDetailFragment : Fragment() {
         // настройка RecyclerView
         with(binding) {
             modelDetailRecyclerView.apply {
-                adapter = viewModel.elementsLiveData.value?.let { ModelDetailAdapter(it) }
+                adapter = viewModel.modelLiveData.value?.let { ModelDetailAdapter(it) }
                 layoutManager = LinearLayoutManager(activity)
             }
         }
