@@ -5,19 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentModelListBinding
 import org.egorkazantsev.dekonmobile.presentation.ui.adapter.ModelListAdapter
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.ModelListViewModel
 import java.util.*
 
 @AndroidEntryPoint
-class ModelListFragment : Fragment(), ModelListAdapter.OnItemClickListener {
+class ModelListFragment : Fragment(), ModelListAdapter.OnModelClickListener {
 
     private var _binding: FragmentModelListBinding? = null
     private val binding get() = _binding!!
@@ -48,7 +46,7 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnItemClickListener {
     }
 
     // клик по элементу в RecyclerView
-    override fun onItemClick(id: UUID) {
+    override fun onModelClick(id: UUID) {
         val action = ModelListFragmentDirections.actionModelListFragmentToModelFragment(id)
         findNavController().navigate(action)
     }

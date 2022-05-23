@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.egorkazantsev.dekonmobile.databinding.CriteriaItemBinding
@@ -11,12 +12,14 @@ import org.egorkazantsev.dekonmobile.databinding.MatrixItemBinding
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Matrix
 import org.egorkazantsev.dekonmobile.domain.model.Model
+import java.util.*
 
 private const val MATRIX_VIEW_TYPE = 0
 private const val CRITERIA_VIEW_TYPE = 1
 
 class ModelDetailAdapter(
-    private val model: Model
+    private val model: Model,
+    private val onCriteriaClickListener: OnCriteriaClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val elements = model.root.elements
@@ -27,7 +30,8 @@ class ModelDetailAdapter(
         // биндинг всех UI компонентов
         fun bind(matrix: Matrix) {
             with(binding) {
-                // текста для TextView
+
+                // размер и стиль текста для главной матрицы
                 if (matrix.level == 0) {
                     matrixNameTextView.apply {
                         setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
@@ -38,6 +42,8 @@ class ModelDetailAdapter(
                         typeface = Typeface.DEFAULT_BOLD
                     }
                 }
+
+                // текста для TextView
                 matrixNameTextView.text = matrix.name
                 matrixValueTextView.text = matrix.value.toString()
 
@@ -50,7 +56,8 @@ class ModelDetailAdapter(
 
     inner class CriteriaViewHolder(
         val binding: CriteriaItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
         // биндинг всех UI компонентов
         fun bind(criteria: Criteria) {
             with(binding) {
@@ -62,9 +69,26 @@ class ModelDetailAdapter(
                 val color = makeColor(criteria.level)
                 elementColorCardView.setCardBackgroundColor(color)
 
-                // TODO повесить слушательно, но реализацию сделать выше
-                editValueImageButton.setOnClickListener(null)
+                // клик по ImageButton
+                editValueImageButton.setOnClickListener(this@CriteriaViewHolder)
+                // клик по элементу списка
+                root.setOnClickListener(this@CriteriaViewHolder)
             }
+        }
+
+        // обработка кликов
+        override fun onClick(v: View?) {
+            val position = bindingAdapterPosition
+            val id = elements[position].id
+            if (position != RecyclerView.NO_POSITION)
+                if (v != null) {
+                    when (v.id) {
+                        binding.root.id ->
+                            onCriteriaClickListener.onCriteriaClick(id)
+                        binding.editValueImageButton.id ->
+                            onCriteriaClickListener.onEditButtonClick(id)
+                    }
+                }
         }
     }
 
@@ -111,5 +135,10 @@ class ModelDetailAdapter(
                 (minColor + (jump * level)).toFloat(), 0.6f, 1.0f
             )
         )
+    }
+
+    interface OnCriteriaClickListener {
+        fun onCriteriaClick(id: UUID)
+        fun onEditButtonClick(id: UUID)
     }
 }

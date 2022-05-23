@@ -10,28 +10,28 @@ import java.util.*
 
 class ModelListAdapter(
     private val models: List<Model>,
-    private val onItemClickListener: OnItemClickListener
+    private val onModelClickListener: OnModelClickListener
 ) : RecyclerView.Adapter<ModelListAdapter.ModelViewHolder>() {
 
     inner class ModelViewHolder(
         val binding: ModelItemBinding
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-        init {
-            binding.root.setOnClickListener(this)
-        }
-
         // биндинг всех UI компонентов
         fun bind(model: Model) {
             with(binding) {
+                // текста для TextView
                 modelNameTextView.text = model.name
+                // клик по элементу списка
+                root.setOnClickListener(this@ModelViewHolder)
             }
         }
 
+        // обработка кликов
         override fun onClick(view: View?) {
             val position = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION)
-                onItemClickListener.onItemClick(models[position].id)
+                onModelClickListener.onModelClick(models[position].id)
         }
     }
 
@@ -50,7 +50,7 @@ class ModelListAdapter(
 
     override fun getItemCount() = models.size
 
-    interface OnItemClickListener {
-        fun onItemClick(id: UUID)
+    interface OnModelClickListener {
+        fun onModelClick(id: UUID)
     }
 }
