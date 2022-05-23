@@ -47,7 +47,8 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnModelClickListener {
 
     // клик по элементу в RecyclerView
     override fun onModelClick(id: UUID) {
-        val action = ModelListFragmentDirections.actionModelListFragmentToModelFragment(id)
+        val action = ModelListFragmentDirections
+            .actionModelListFragmentToModelFragment(id)
         findNavController().navigate(action)
     }
 

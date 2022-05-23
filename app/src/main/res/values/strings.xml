@@ -13,4 +13,5 @@
     <string name="kpp">КПП</string>
     <string name="kio">КИО</string>
     <string name="full_name">ФИО</string>
+    <string name="register_model">Зарегистрировать модель</string>
 </resources>

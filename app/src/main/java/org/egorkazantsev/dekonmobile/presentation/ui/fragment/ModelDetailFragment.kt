@@ -1,14 +1,16 @@
 package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentModelDetailBinding
 import org.egorkazantsev.dekonmobile.presentation.ui.adapter.ModelDetailAdapter
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.ModelDetailViewModel
@@ -28,7 +30,14 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
     ): View {
         _binding = FragmentModelDetailBinding.inflate(inflater, container, false)
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.model_detail_menu, menu)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +52,23 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
                 layoutManager = LinearLayoutManager(activity)
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // формирование Action
+        val model = viewModel.modelLiveData.value
+        val action = ModelDetailFragmentDirections
+            .actionModelFragmentToModelRegistrationFragment(
+                model?.name ?: "",
+                model?.owner?.fullName ?: ""
+            )
+
+        // обработка кликов
+        when (item.itemId) {
+            R.id.registerModel -> findNavController().navigate(action)
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

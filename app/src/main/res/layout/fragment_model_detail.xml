@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.fragment.ModelDetailFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/modelDetail_recyclerView"
         android:layout_width="0dp"
