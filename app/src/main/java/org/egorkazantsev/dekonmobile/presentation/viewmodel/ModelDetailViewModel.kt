@@ -7,12 +7,14 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.usecase.GetModelByIdUC
+import org.egorkazantsev.dekonmobile.domain.usecase.SetCriteriaValueUC
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class ModelDetailViewModel @Inject constructor(
     private val getModelById: GetModelByIdUC,
+    private val setCriteriaValueUC: SetCriteriaValueUC,
     private val state: SavedStateHandle
 ) : ViewModel() {
 
@@ -27,5 +29,12 @@ class ModelDetailViewModel @Inject constructor(
     private fun loadModelById(id: UUID) {
         val model = getModelById.execute(id)
         _modelLiveData.value = model
+    }
+
+    fun setCriteriaValue(id: UUID, value: Double) {
+        // изменяем значение критерии
+        modelLiveData.value?.let { setCriteriaValueUC.execute(it.id, id, value) }
+        // обновляем модель в viewModel
+        modelLiveData.value?.let { loadModelById(it.id) }
     }
 }

@@ -35,23 +35,18 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.model_detail_menu, menu)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // настройка RecyclerView
-        with(binding) {
-            modelDetailRecyclerView.apply {
-                adapter = viewModel.modelLiveData.value?.let {
-                    ModelDetailAdapter(it, this@ModelDetailFragment)
-                }
-                layoutManager = LinearLayoutManager(activity)
-            }
+        // слушатель для модели для RecyclerView
+        viewModel.modelLiveData.observe(viewLifecycleOwner) {
+            configureRecyclerView()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.model_detail_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -63,7 +58,7 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
                 model?.owner?.fullName ?: ""
             )
 
-        // обработка кликов
+        // обработка нажатий в меню
         when (item.itemId) {
             R.id.registerModel -> findNavController().navigate(action)
         }
@@ -76,11 +71,29 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
         _binding = null
     }
 
+    // нажатие на элемент списка
     override fun onCriteriaClick(id: UUID) {
-        Toast.makeText(context, id.toString(), Toast.LENGTH_SHORT).show()
+        val model = viewModel.modelLiveData.value
+        val action = ModelDetailFragmentDirections
+            .actionModelFragmentToGraphFragment(id, model!!.id)
+        findNavController().navigate(action)
     }
 
+    // нажатие на кнопку редактирования
     override fun onEditButtonClick(id: UUID) {
-        Toast.makeText(context, "edit btn", Toast.LENGTH_SHORT).show()
+        // todo диалоговое окно изменения значения критерия
+        viewModel.setCriteriaValue(id, 11.1)
+    }
+
+    // настройка RecyclerView
+    private fun configureRecyclerView() {
+        with(binding) {
+            modelDetailRecyclerView.apply {
+                adapter = viewModel.modelLiveData.value?.let {
+                    ModelDetailAdapter(it, this@ModelDetailFragment)
+                }
+                layoutManager = LinearLayoutManager(activity)
+            }
+        }
     }
 }
