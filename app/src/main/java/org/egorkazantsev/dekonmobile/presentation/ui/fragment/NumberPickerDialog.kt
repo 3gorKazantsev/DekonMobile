@@ -24,7 +24,7 @@ class NumberPickerDialog(
         with(binding) {
             integerNumberPicker.apply {
                 minValue = 0
-                maxValue = 10
+                maxValue = 9
                 value = makeInteger(this@NumberPickerDialog.value)
             }
             decimalNumberPicker.apply {

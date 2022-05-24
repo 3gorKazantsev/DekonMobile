@@ -52,8 +52,8 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnModelClickListener {
         findNavController().navigate(action)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

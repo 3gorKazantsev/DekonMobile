@@ -19,4 +19,9 @@
     <string name="edit_value">Изменить значение</string>
     <string name="cancel">Отмена</string>
     <string name="save">Сохранить</string>
+    <string name="matrix_criteria">Матрица - Критерий</string>
+    <string name="k">K</string>
+    <string name="m">M</string>
+    <string name="criteria">Критерий:&#160;</string>
+    <string name="matrix">Матрица:&#160;</string>
 </resources>

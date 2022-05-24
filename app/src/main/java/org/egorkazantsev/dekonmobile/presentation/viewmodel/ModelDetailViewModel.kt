@@ -15,7 +15,7 @@ import javax.inject.Inject
 class ModelDetailViewModel @Inject constructor(
     private val getModelById: GetModelByIdUC,
     private val setCriteriaValueUC: SetCriteriaValueUC,
-    private val state: SavedStateHandle
+    state: SavedStateHandle
 ) : ViewModel() {
 
     private val _modelLiveData = MutableLiveData<Model>()
