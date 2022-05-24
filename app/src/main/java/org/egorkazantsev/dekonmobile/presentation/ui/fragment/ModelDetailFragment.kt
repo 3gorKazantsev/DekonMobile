@@ -17,7 +17,8 @@ import org.egorkazantsev.dekonmobile.presentation.viewmodel.ModelDetailViewModel
 import java.util.*
 
 @AndroidEntryPoint
-class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListener {
+class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListener,
+    OnSaveClickListener {
 
     private var _binding: FragmentModelDetailBinding? = null
     private val binding get() = _binding!!
@@ -71,20 +72,6 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
         _binding = null
     }
 
-    // нажатие на элемент списка
-    override fun onCriteriaClick(id: UUID) {
-        val model = viewModel.modelLiveData.value
-        val action = ModelDetailFragmentDirections
-            .actionModelFragmentToGraphFragment(id, model!!.id)
-        findNavController().navigate(action)
-    }
-
-    // нажатие на кнопку редактирования
-    override fun onEditButtonClick(id: UUID) {
-        // todo диалоговое окно изменения значения критерия
-        viewModel.setCriteriaValue(id, 11.1)
-    }
-
     // настройка RecyclerView
     private fun configureRecyclerView() {
         with(binding) {
@@ -95,5 +82,25 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
                 layoutManager = LinearLayoutManager(activity)
             }
         }
+    }
+
+    // нажатие на элемент списка
+    override fun onCriteriaClick(id: UUID) {
+        val model = viewModel.modelLiveData.value
+        val action = ModelDetailFragmentDirections
+            .actionModelFragmentToGraphFragment(id, model!!.id)
+        findNavController().navigate(action)
+    }
+
+    // нажатие на кнопку редактирования
+    override fun onEditButtonClick(id: UUID) {
+        val value = viewModel.modelLiveData.value!!.root.elements.find { it.id == id }!!.value
+        NumberPickerDialog(id, value, this@ModelDetailFragment)
+            .show(parentFragmentManager, "NumberPickerDialog")
+    }
+
+    // клик на кнопку сохранить диалогового окна при изменении значения критиерия
+    override fun onSaveClick(id: UUID, value: Double) {
+        viewModel.setCriteriaValue(id, value)
     }
 }
