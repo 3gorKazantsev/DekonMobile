@@ -21,11 +21,19 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        // изменение заголовка экшн бара
+        activity?.title = getString(R.string.app_name)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // клик по кнопке войти
         binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_modelListFragment)
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {

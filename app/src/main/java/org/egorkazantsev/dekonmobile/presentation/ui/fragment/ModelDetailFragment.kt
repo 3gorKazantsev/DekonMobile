@@ -2,12 +2,9 @@ package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import org.egorkazantsev.dekonmobile.R
@@ -31,6 +28,9 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
     ): View {
         _binding = FragmentModelDetailBinding.inflate(inflater, container, false)
 
+        // изменение заголовка экшн бара
+        activity?.title = viewModel.model.value?.name
+
         setHasOptionsMenu(true)
 
         return binding.root
@@ -40,7 +40,7 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
         super.onViewCreated(view, savedInstanceState)
 
         // слушатель для модели для RecyclerView
-        viewModel.modelLiveData.observe(viewLifecycleOwner) {
+        viewModel.model.observe(viewLifecycleOwner) {
             configureRecyclerView()
         }
     }
@@ -52,7 +52,7 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // формирование Action
-        val model = viewModel.modelLiveData.value
+        val model = viewModel.model.value
         val action = ModelDetailFragmentDirections
             .actionModelFragmentToModelRegistrationFragment(
                 model?.name ?: "",
@@ -76,7 +76,7 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
     private fun configureRecyclerView() {
         with(binding) {
             modelDetailRecyclerView.apply {
-                adapter = viewModel.modelLiveData.value?.let {
+                adapter = viewModel.model.value?.let {
                     ModelDetailAdapter(it, this@ModelDetailFragment)
                 }
                 layoutManager = LinearLayoutManager(activity)
@@ -86,7 +86,7 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
 
     // нажатие на элемент списка
     override fun onCriteriaClick(id: UUID) {
-        val model = viewModel.modelLiveData.value
+        val model = viewModel.model.value
         val action = ModelDetailFragmentDirections
             .actionModelFragmentToGraphFragment(id, model!!.id)
         findNavController().navigate(action)
@@ -94,7 +94,7 @@ class ModelDetailFragment : Fragment(), ModelDetailAdapter.OnCriteriaClickListen
 
     // нажатие на кнопку редактирования
     override fun onEditButtonClick(id: UUID) {
-        val value = viewModel.modelLiveData.value!!.root.elements.find { it.id == id }!!.value
+        val value = viewModel.model.value!!.root.elements.find { it.id == id }!!.value
         NumberPickerDialog(id, value, this@ModelDetailFragment)
             .show(parentFragmentManager, "NumberPickerDialog")
     }

@@ -64,7 +64,8 @@ class GraphViewModel @Inject constructor (
     }
 
     private fun loadCriteriaById(modelId: UUID, criteriaId: UUID) {
-        getCriteriaByIdUC.execute(modelId, criteriaId)
+        val criteria = getCriteriaByIdUC.execute(modelId, criteriaId)
+        _criteriaLiveData.value = criteria
     }
 
     private fun generateDataSet() {

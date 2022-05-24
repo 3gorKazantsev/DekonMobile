@@ -30,6 +30,9 @@ class GraphFragment : Fragment() {
     ): View {
         _binding = FragmentGraphBinding.inflate(inflater, container, false)
 
+        // изменение заголовка экшн бара
+        activity?.title = viewModel.criteria.value?.name
+
         return binding.root
     }
 

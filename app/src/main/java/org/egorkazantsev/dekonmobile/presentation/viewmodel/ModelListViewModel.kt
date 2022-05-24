@@ -14,7 +14,7 @@ class ModelListViewModel @Inject constructor(
 ): ViewModel() {
 
     private val _modelListLiveData = MutableLiveData<List<Model>>()
-    val modelListLiveData: LiveData<List<Model>> = _modelListLiveData
+    val modelList: LiveData<List<Model>> = _modelListLiveData
 
     init {
         loadAllModels()

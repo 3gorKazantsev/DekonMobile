@@ -24,4 +24,6 @@
     <string name="m">M</string>
     <string name="criteria">Критерий:&#160;</string>
     <string name="matrix">Матрица:&#160;</string>
+    <string name="choose_model">Выберите модель</string>
+    <string name="model_registration">Регистрация модели</string>
 </resources>

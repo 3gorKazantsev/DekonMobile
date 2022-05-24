@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentModelListBinding
 import org.egorkazantsev.dekonmobile.presentation.ui.adapter.ModelListAdapter
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.ModelListViewModel
@@ -28,6 +29,9 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnModelClickListener {
     ): View {
         _binding = FragmentModelListBinding.inflate(inflater, container, false)
 
+        // изменение заголовка экшн бара
+        activity?.title = getString(R.string.choose_model)
+
         return binding.root
     }
 
@@ -37,7 +41,7 @@ class ModelListFragment : Fragment(), ModelListAdapter.OnModelClickListener {
         // настройка RecyclerView
         with(binding) {
             modelListRecyclerView.apply {
-                adapter = viewModel.modelListLiveData.value?.let {
+                adapter = viewModel.modelList.value?.let {
                     ModelListAdapter(it, this@ModelListFragment)
                 }
                 layoutManager = LinearLayoutManager(activity)

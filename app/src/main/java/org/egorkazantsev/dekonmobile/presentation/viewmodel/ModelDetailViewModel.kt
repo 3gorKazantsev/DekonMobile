@@ -19,7 +19,7 @@ class ModelDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _modelLiveData = MutableLiveData<Model>()
-    val modelLiveData: LiveData<Model> = _modelLiveData
+    val model: LiveData<Model> = _modelLiveData
 
     init {
         // загружаем модель по ID полученному из SafeArgs
@@ -33,8 +33,8 @@ class ModelDetailViewModel @Inject constructor(
 
     fun setCriteriaValue(id: UUID, value: Double) {
         // изменяем значение критерии
-        modelLiveData.value?.let { setCriteriaValueUC.execute(it.id, id, value) }
+        model.value?.let { setCriteriaValueUC.execute(it.id, id, value) }
         // обновляем модель в viewModel
-        modelLiveData.value?.let { loadModelById(it.id) }
+        model.value?.let { loadModelById(it.id) }
     }
 }
