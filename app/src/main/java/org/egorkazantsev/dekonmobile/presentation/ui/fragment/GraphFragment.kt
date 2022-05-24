@@ -1,7 +1,10 @@
 package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.mikephil.charting.data.Entry
@@ -60,8 +63,15 @@ class GraphFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (viewModel.currentCriteriaValue.value != null && viewModel.currentMatrixValue.value != null) {
-            // todo формировать пдф, сохранять и отправлять его
-        }
+            when (item.itemId) {
+                R.id.saveGraph -> {
+                    // формирование pdf файла и его сохранение
+                    val bmp = createBmp(binding.graphLineChart)
+                    viewModel.model.value?.let { viewModel.createPDF(it.name, bmp) }
+                }
+            }
+        } else
+            Toast.makeText(context, R.string.no_values_selected, Toast.LENGTH_SHORT).show()
 
         return super.onOptionsItemSelected(item)
     }
@@ -69,6 +79,13 @@ class GraphFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun createBmp(v: View): Bitmap {
+        val bmp = Bitmap.createBitmap(v.width, v.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bmp)
+        v.draw(canvas)
+        return bmp
     }
 
     // настройка графика
@@ -89,6 +106,7 @@ class GraphFragment : Fragment() {
                 override fun onValueSelected(e: Entry?, h: Highlight?) {
                     viewModel.setCurrentValue(h?.x, h?.y)
                 }
+
                 override fun onNothingSelected() {
                     viewModel.setCurrentValue(null, null)
                 }

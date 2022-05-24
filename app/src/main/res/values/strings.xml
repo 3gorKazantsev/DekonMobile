@@ -28,4 +28,5 @@
     <string name="model_registration">Регистрация модели</string>
     <string name="save_graph">Сохранить отчет</string>
     <string name="share_graph">Поделиться отчетом</string>
+    <string name="no_values_selected">Значения не выбраны</string>
 </resources>

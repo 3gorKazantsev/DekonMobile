@@ -1,21 +1,28 @@
 package org.egorkazantsev.dekonmobile.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
+import android.graphics.pdf.PdfDocument
+import android.os.Environment
+import android.util.Log
+import androidx.lifecycle.*
 import com.github.mikephil.charting.data.Entry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.usecase.GetCriteriaByIdUC
 import org.egorkazantsev.dekonmobile.domain.usecase.GetModelByIdUC
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @HiltViewModel
-class GraphViewModel @Inject constructor (
+class GraphViewModel @Inject constructor(
     private val getModelByIdUC: GetModelByIdUC,
     private val getCriteriaByIdUC: GetCriteriaByIdUC,
     state: SavedStateHandle
@@ -58,6 +65,47 @@ class GraphViewModel @Inject constructor (
         _currentMatrixValueLiveData.value = matrix
     }
 
+    // формирование pfd документа
+    fun createPDF(name: String, graphBmp: Bitmap) {
+        val paint = Paint()
+        val text = Paint().apply {
+            textSize = 15f
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+            color = Color.BLACK
+            textAlign = Paint.Align.LEFT
+        }
+        val pdfDoc = PdfDocument()
+
+        val page1Info = PdfDocument.PageInfo.Builder(graphBmp.width, graphBmp.height, 1).create()
+        val page1 = pdfDoc.startPage(page1Info)
+        val canvas = page1.canvas
+        canvas.drawBitmap(graphBmp, 1f, 1f, paint)
+        pdfDoc.finishPage(page1)
+
+        // todo сделать вторую страницу, где список всех элементов
+
+        val storageState = Environment.getExternalStorageState()
+        if (Environment.MEDIA_MOUNTED != storageState)
+            return
+
+        val fileName = createProperName(name)
+        val file = File(Environment.getExternalStorageDirectory().path + "/Download/$fileName")
+
+        try {
+            pdfDoc.writeTo(FileOutputStream(file))
+            Log.d("DDDebug", "success")
+        } catch (e: IOException) {
+            e.printStackTrace()
+//                Toast.makeText(context, "Что-то пошло не так", Toast.LENGTH_SHORT).show()
+        }
+
+        pdfDoc.close()
+    }
+
+    private fun createProperName(name: String): String {
+        return "${name.replace(Regex("[^0-9a-zA-Zа-яёА-ЯЁ]+"), "_")}.pdf"
+    }
+
     private fun loadModelById(id: UUID) {
         val model = getModelByIdUC.execute(id)
         _modelLiveData.value = model
@@ -71,12 +119,12 @@ class GraphViewModel @Inject constructor (
     private fun generateDataSet() {
         _dataSetLiveData.value = arrayListOf()
         _dataSetLiveData.value?.apply {
-            add(Entry(1f,6f))
-            add(Entry(2f,3f))
-            add(Entry(3f,1f))
-            add(Entry(4f,3f))
-            add(Entry(5f,5f))
-            add(Entry(6f,6f))
+            add(Entry(1f, 6f))
+            add(Entry(2f, 3f))
+            add(Entry(3f, 1f))
+            add(Entry(4f, 3f))
+            add(Entry(5f, 5f))
+            add(Entry(6f, 6f))
         }
     }
 }
