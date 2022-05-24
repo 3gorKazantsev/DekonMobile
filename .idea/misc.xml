@@ -6,6 +6,7 @@
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/drawable/ic_edit.xml" value="0.357" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3675" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/drawable/ic_register_model.xml" value="0.2405" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/drawable/ic_share.xml" value="0.2405" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/criteria_item.xml" value="0.5269461077844312" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_criteria.xml" value="0.36666666666666664" />
@@ -18,7 +19,8 @@
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/matrix_item.xml" value="0.17831813576494426" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/model_item.xml" value="0.365625" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/number_picker_dialog.xml" value="0.34601449275362317" />
-        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/menu/model_detail_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/menu/graph_menu.xml" value="0.2953703703703704" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/menu/model_detail_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

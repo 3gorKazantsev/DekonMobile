@@ -26,4 +26,6 @@
     <string name="matrix">Матрица:&#160;</string>
     <string name="choose_model">Выберите модель</string>
     <string name="model_registration">Регистрация модели</string>
+    <string name="save_graph">Сохранить отчет</string>
+    <string name="share_graph">Поделиться отчетом</string>
 </resources>

@@ -1,9 +1,7 @@
 package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.mikephil.charting.data.Entry
@@ -33,6 +31,8 @@ class GraphFragment : Fragment() {
         // изменение заголовка экшн бара
         activity?.title = viewModel.criteria.value?.name
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -51,6 +51,19 @@ class GraphFragment : Fragment() {
                 setCurrentValue()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.graph_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (viewModel.currentCriteriaValue.value != null && viewModel.currentMatrixValue.value != null) {
+            // todo формировать пдф, сохранять и отправлять его
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
