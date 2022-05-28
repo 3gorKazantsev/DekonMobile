@@ -117,8 +117,14 @@ class GraphFragment : Fragment() {
     // установка значений в TextView текущего значения критерия и матрицы
     private fun setCurrentValue() {
         binding.apply {
-            criteriaValueTextView.text = viewModel.currentCriteriaValue.value.toString()
-            matrixValueTextView.text = viewModel.currentMatrixValue.value.toString()
+            if (viewModel.currentCriteriaValue.value != null)
+                criteriaValueTextView.text = viewModel.currentCriteriaValue.value.toString()
+            else
+                criteriaValueTextView.text = "-"
+            if (viewModel.currentMatrixValue.value != null)
+                matrixValueTextView.text = viewModel.currentMatrixValue.value.toString()
+            else
+                matrixValueTextView.text = "-"
         }
     }
 }

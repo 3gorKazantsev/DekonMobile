@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/k_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/m_textView"
-        app:layout_constraintTop_toBottomOf="@+id/criteria_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/k_textView"
@@ -43,14 +43,11 @@
         android:id="@+id/criteria_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/criteria"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/criteriaValue_textView"
@@ -59,19 +56,18 @@
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/criteria_textView"
-        app:layout_constraintTop_toTopOf="@+id/criteria_textView"
+        tools:layout_editor_absoluteY="8dp"
         tools:text="1.0" />
 
     <TextView
         android:id="@+id/matrix_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="@string/matrix"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/criteriaValue_textView"
-        app:layout_constraintTop_toTopOf="@+id/criteria_textView" />
+        app:layout_constraintEnd_toStartOf="@+id/matrixValue_textView"
+        app:layout_constraintTop_toTopOf="@+id/matrixValue_textView" />
 
     <TextView
         android:id="@+id/matrixValue_textView"
@@ -79,8 +75,20 @@
         android:layout_height="wrap_content"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/matrix_textView"
-        app:layout_constraintTop_toTopOf="@+id/matrix_textView"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
         tools:text="2.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/space"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

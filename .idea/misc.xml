@@ -8,16 +8,16 @@
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/drawable/ic_register_model.xml" value="0.2405" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/drawable/ic_share.xml" value="0.2405" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/criteria_item.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/criteria_item.xml" value="0.75" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_criteria.xml" value="0.36666666666666664" />
-        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_graph.xml" value="0.34601449275362317" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_graph.xml" value="0.5" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_model.xml" value="0.36666666666666664" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_model_detail.xml" value="0.33" />
-        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_model_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_model_list.xml" value="0.5" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/fragment_model_registration.xml" value="0.36666666666666664" />
-        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/matrix_item.xml" value="0.1" />
-        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/model_item.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/matrix_item.xml" value="0.67" />
+        <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/model_item.xml" value="0.67" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/layout/number_picker_dialog.xml" value="0.34601449275362317" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/menu/graph_menu.xml" value="0.2953703703703704" />
         <entry key="..\:/Projects/Android/DekonMobile/app/src/main/res/menu/model_detail_menu.xml" value="0.1" />
