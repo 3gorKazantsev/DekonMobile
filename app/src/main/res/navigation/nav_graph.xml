@@ -15,7 +15,7 @@
             app:destination="@id/modelListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/modelFragment"
+        android:id="@+id/modelDetailFragment"
         android:name="org.egorkazantsev.dekonmobile.presentation.ui.fragment.ModelDetailFragment"
         android:label="fragment_model"
         tools:layout="@layout/fragment_model_detail" >
@@ -59,6 +59,6 @@
         tools:layout="@layout/fragment_model_list" >
         <action
             android:id="@+id/action_modelListFragment_to_modelFragment"
-            app:destination="@id/modelFragment" />
+            app:destination="@id/modelDetailFragment" />
     </fragment>
 </navigation>
