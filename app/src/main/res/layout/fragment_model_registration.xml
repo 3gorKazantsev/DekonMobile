@@ -226,6 +226,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/birthDate_editText"
                 android:layout_width="match_parent"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:layout_height="wrap_content"
                 android:hint="@string/birth_date"
                 android:inputType="date" />
