@@ -5,9 +5,9 @@
     <string name="username">Имя пользователя</string>
     <string name="password">Пароль</string>
     <string name="log_in">Войти</string>
-    <string name="name">Название</string>
+    <string name="name">Наименование</string>
     <string name="purpose">Назначение</string>
-    <string name="organization">Организация</string>
+    <string name="organization_name">Название организации</string>
     <string name="inn">ИНН</string>
     <string name="ogrn">ОГРН</string>
     <string name="kpp">КПП</string>
@@ -30,4 +30,23 @@
     <string name="share_graph">Поделиться отчетом</string>
     <string name="no_values_selected">Значения не выбраны</string>
     <string name="space">&#160;&#160;&#160;</string>
+    <string name="org_info">Данные организации</string>
+    <string name="address">Адрес</string>
+    <string name="personal_info">Личные данные</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="series">Серия</string>
+    <string name="passport_number">Номер</string>
+    <string name="passport">Паспорт</string>
+    <string name="registration_address">Адрес прописки</string>
+    <string name="benefits">Льготы</string>
+    <string name="student">Студент</string>
+    <string name="disability">Инвалидность</string>
+    <string name="contacts_info">Контактная информация</string>
+    <string name="residential_address">Адрес проживания</string>
+    <string name="email">Электронная почта</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="register_format">Формат регистрации</string>
+    <string name="you_are_author_service_is_owner">Автор - вы, правообладатель - сервис</string>
+    <string name="you_are_author_and_owner">Автор и правообладатель - вы</string>
+    <string name="snils">СНИЛС</string>
 </resources>

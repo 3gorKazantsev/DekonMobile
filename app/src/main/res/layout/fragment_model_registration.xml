@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/modelName_TextInputLayout"
+            android:id="@+id/modelName_til"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,116 +24,30 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/modelName_editText"
                 android:layout_width="match_parent"
+                android:inputType="text"
                 android:layout_height="wrap_content"
                 android:hint="@string/name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/modulePurpose_textInputLayout"
+            android:id="@+id/modulePurpose_til"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/modelName_TextInputLayout">
+            app:layout_constraintEnd_toEndOf="@+id/modelName_til"
+            app:layout_constraintStart_toStartOf="@+id/modelName_til"
+            app:layout_constraintTop_toBottomOf="@+id/modelName_til">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/modulePurpose_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:hint="@string/purpose"
                 android:maxLength="700" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/organisationName_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/modulePurpose_textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/organization" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/INN_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/organisationName_textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inn"
-                android:inputType="number"
-                android:maxLength="12" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/OGRN_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/INN_textInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/INN_textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/INN_textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/ogrn"
-                android:inputType="number"
-                android:maxLength="13" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/KPP_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/KIO_textInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/KIO_textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/KIO_textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/kpp"
-                android:inputType="number"
-                android:maxLength="9" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/KIO_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/organisationName_textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/kio"
-                android:inputType="number"
-                android:maxLength="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -141,23 +55,438 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="232dp" />
+            app:layout_constraintGuide_percent="0.6" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fullName_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personalInfo_textView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullName_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orgKPP_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/orgKIO_til"
+            app:layout_constraintStart_toStartOf="@+id/orgKIO_til"
+            app:layout_constraintTop_toTopOf="@+id/orgOGRN_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orgKPP_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/kpp"
+                android:inputType="numberDecimal"
+                android:maxLength="9" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orgOGRN_til"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/modelName_TextInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/OGRN_textInputLayout">
+            app:layout_constraintEnd_toEndOf="@+id/orgINN_til"
+            app:layout_constraintStart_toStartOf="@+id/orgINN_til"
+            app:layout_constraintTop_toBottomOf="@+id/orgINN_til">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orgOGRN_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/full_name"
-                android:inputType="text" />
+                android:hint="@string/ogrn"
+                android:inputType="numberDecimal"
+                android:maxLength="13" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orgINN_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/orgAddress_til"
+            app:layout_constraintTop_toBottomOf="@+id/orgAddress_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orgINN_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inn"
+                android:inputType="numberDecimal"
+                android:maxLength="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orgName_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orgInfo_textView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orgName_editText"
+                android:layout_width="match_parent"
+                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:hint="@string/organization_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orgKIO_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/orgAddress_til"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/orgINN_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orgKIO_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/kio"
+                android:inputType="numberDecimal"
+                android:maxLength="5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/orgInfo_textView"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/org_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modulePurpose_til" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/orgAddress_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/orgName_til"
+            app:layout_constraintStart_toStartOf="@+id/orgName_til"
+            app:layout_constraintTop_toBottomOf="@+id/orgName_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/orgAddress_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:hint="@string/address" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/personalInfo_textView"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/personal_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orgOGRN_til" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/birthDate_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/fullName_til"
+            app:layout_constraintStart_toStartOf="@+id/fullName_til"
+            app:layout_constraintTop_toBottomOf="@+id/fullName_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/birthDate_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/birth_date"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passportSeries_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/passport_textView"
+            app:layout_constraintTop_toBottomOf="@+id/passport_textView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passportSeries_editText"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                android:layout_height="wrap_content"
+                android:hint="@string/series" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passportNumber_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/passport_textView"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/passportSeries_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passportNumber_editText"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:layout_height="wrap_content"
+                android:hint="@string/passport_number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/passport_textView"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/passport"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/birthDate_til"
+            app:layout_constraintStart_toStartOf="@+id/birthDate_til"
+            app:layout_constraintTop_toBottomOf="@+id/birthDate_til" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addrRegistration_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/passport_textView"
+            app:layout_constraintStart_toStartOf="@+id/passport_textView"
+            app:layout_constraintTop_toBottomOf="@+id/passportSeries_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registration_address_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:hint="@string/registration_address" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/benefits_textView"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/benefits"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/personalSNILS_til"
+            app:layout_constraintStart_toStartOf="@+id/personalINN_til"
+            app:layout_constraintTop_toBottomOf="@+id/personalINN_til" />
+
+        <CheckBox
+            android:id="@+id/student_checkBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/student"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/benefits_textView"
+            app:layout_constraintTop_toBottomOf="@+id/benefits_textView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <CheckBox
+            android:id="@+id/disability_checkBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/disability"
+            app:layout_constraintEnd_toEndOf="@+id/benefits_textView"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/benefits_textView" />
+
+        <TextView
+            android:id="@+id/contacts_info_textView"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/contacts_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/student_checkBox" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/address_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contacts_info_textView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address_editText"
+                android:layout_width="match_parent"
+                android:inputType="textPostalAddress"
+                android:layout_height="wrap_content"
+                android:hint="@string/residential_address" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/address_til"
+            app:layout_constraintStart_toStartOf="@+id/address_til"
+            app:layout_constraintTop_toBottomOf="@+id/address_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_editText"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/email_til"
+            app:layout_constraintStart_toStartOf="@+id/email_til"
+            app:layout_constraintTop_toBottomOf="@+id/email_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="@string/phone_number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/registerFormat_textView"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/register_format"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_til" />
+
+        <RadioGroup
+            android:id="@+id/formatRegistration_radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:checkedButton="@id/ownerIsService_radioButton"
+            app:layout_constraintEnd_toEndOf="@+id/registerFormat_textView"
+            app:layout_constraintStart_toStartOf="@+id/registerFormat_textView"
+            app:layout_constraintTop_toBottomOf="@+id/registerFormat_textView">
+
+            <RadioButton
+                android:id="@+id/ownerIsService_radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/you_are_author_service_is_owner" />
+
+            <RadioButton
+                android:id="@+id/ownerIsUser_radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/you_are_author_and_owner" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/personalINN_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/addrRegistration_til"
+            app:layout_constraintTop_toBottomOf="@+id/addrRegistration_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/personalINN_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:hint="@string/inn" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/personalSNILS_til"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/addrRegistration_til"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/personalINN_til">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/personalSNILS_editText"
+                android:layout_width="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLength="11"
+                android:layout_height="wrap_content"
+                android:hint="@string/snils" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
