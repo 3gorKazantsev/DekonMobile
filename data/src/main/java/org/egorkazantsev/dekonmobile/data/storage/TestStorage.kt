@@ -5,6 +5,7 @@ import org.egorkazantsev.dekonmobile.domain.model.Matrix
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.model.Owner
 import java.util.*
+import kotlin.math.roundToInt
 
 val models = listOf(
     Model(
@@ -43,46 +44,46 @@ val models = listOf(
         UUID.randomUUID(), "Качество работы управляющей компании",
         Owner(UUID.randomUUID(), "Зарплатин Пупа Лупович"),
         Matrix(
-            UUID.randomUUID(), "Качество управления МКД", 1.0,
+            UUID.randomUUID(), "Качество управления МКД", random(),
             leftElement = Matrix(
-                UUID.randomUUID(), "Критерий оценки качества предоставляемой информации", 1.0,
+                UUID.randomUUID(), "Критерий оценки качества предоставляемой информации", random(),
                 leftElement = Matrix(
-                    UUID.randomUUID(), "Предоставление и доступность информации", 1.0,
+                    UUID.randomUUID(), "Предоставление и доступность информации", random(),
                     leftElement = Criteria(
-                        UUID.randomUUID(), "Предоставление информации о перечне услуг, их стоимости", 1.0
+                        UUID.randomUUID(), "Предоставление информации о перечне услуг, их стоимости", random()
                     ),
                     rightElement = Criteria(
-                        UUID.randomUUID(), "Доступность информации", 1.0
+                        UUID.randomUUID(), "Доступность информации", random()
                     )
                 ),
                 rightElement = Matrix(
-                    UUID.randomUUID(), "Взаимодействие с потребителями", 1.0,
+                    UUID.randomUUID(), "Взаимодействие с потребителями", random(),
                     leftElement = Criteria(
-                        UUID.randomUUID(), "Предоставление годового плана работ и полного отчета об исполнении плана", 1.0
+                        UUID.randomUUID(), "Предоставление годового плана работ и полного отчета об исполнении плана", random()
                     ),
                     rightElement = Criteria(
-                        UUID.randomUUID(), "Взаимодействие с собственниками помещений для получения обратной связи", 1.0
+                        UUID.randomUUID(), "Взаимодействие с собственниками помещений для получения обратной связи", random()
                     )
                 )
             ),
             rightElement = Matrix(
-                UUID.randomUUID(), "Критерий оценки качества услуг и рабор упр. орг.", 1.0,
+                UUID.randomUUID(), "Критерий оценки качества услуг и рабор упр. орг.", random(),
                 leftElement = Matrix(
-                    UUID.randomUUID(), "Обслуживание МКД", 1.0,
+                    UUID.randomUUID(), "Обслуживание МКД", random(),
                     leftElement = Criteria(
-                        UUID.randomUUID(), "Содержание и ремон общего имущества МКД", 1.0
+                        UUID.randomUUID(), "Содержание и ремон общего имущества МКД", random()
                     ),
                     rightElement = Criteria(
-                        UUID.randomUUID(), "Предоставление коммунальных услуг", 1.0
+                        UUID.randomUUID(), "Предоставление коммунальных услуг", random()
                     )
                 ),
                 rightElement = Matrix(
-                    UUID.randomUUID(), "Работа ресурсоснабжающими организациями", 1.0,
+                    UUID.randomUUID(), "Работа ресурсоснабжающими организациями", random(),
                     leftElement = Criteria(
-                        UUID.randomUUID(), "Подписание договоров с РСО, контроль качества услуг, сбор средств и регулярная оплата полученных услуг", 1.0
+                        UUID.randomUUID(), "Подписание договоров с РСО, контроль качества услуг, сбор средств и регулярная оплата полученных услуг", random()
                     ),
                     rightElement = Criteria(
-                        UUID.randomUUID(), "Разработка и прим. мероприятий по энергоснабжению и повышению энергической эффективности МКД", 1.0
+                        UUID.randomUUID(), "Разработка и прим. мероприятий по энергоснабжению и повышению энергической эффективности МКД", random()
                     )
                 )
             )
@@ -150,3 +151,5 @@ val models = listOf(
         )
     )
 )
+
+fun random() = ((10..38).random() / 10.0)

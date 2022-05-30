@@ -119,12 +119,9 @@ class GraphViewModel @Inject constructor(
     private fun generateDataSet() {
         _dataSetLiveData.value = arrayListOf()
         _dataSetLiveData.value?.apply {
-            add(Entry(1f, 6f))
-            add(Entry(2f, 3f))
-            add(Entry(3f, 1f))
-            add(Entry(4f, 3f))
-            add(Entry(5f, 5f))
-            add(Entry(6f, 6f))
+            for (i in 0..9) {
+                add(Entry(i.toFloat(), org.egorkazantsev.dekonmobile.data.storage.random().toFloat()))
+            }
         }
     }
 }

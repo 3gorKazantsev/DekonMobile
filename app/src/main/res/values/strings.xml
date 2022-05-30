@@ -49,4 +49,5 @@
     <string name="you_are_author_service_is_owner">Автор - вы, правообладатель - сервис</string>
     <string name="you_are_author_and_owner">Автор и правообладатель - вы</string>
     <string name="snils">СНИЛС</string>
+    <string name="register">Зарегистрировать</string>
 </resources>
