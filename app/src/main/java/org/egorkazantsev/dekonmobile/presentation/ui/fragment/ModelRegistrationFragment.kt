@@ -62,7 +62,7 @@ class ModelRegistrationFragment : Fragment() {
     }
 
     private fun updateText() {
-        val format = "MM.dd.yyyy"
+        val format = "dd.MM.yyyy"
         val dateFormat = SimpleDateFormat(format, Locale.getDefault())
         binding.birthDateEditText.setText(dateFormat.format(calendar.time))
     }

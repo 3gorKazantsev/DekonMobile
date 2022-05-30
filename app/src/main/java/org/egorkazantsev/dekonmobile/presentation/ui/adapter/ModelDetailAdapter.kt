@@ -126,10 +126,11 @@ class ModelDetailAdapter(
     override fun getItemCount() = elements.size
 
     private fun makeColor(level: Int): Int {
-        val size = model.maxLevel
+//        val size = model.maxLevel + 1
         val minColor = 0
-        val maxColor = 240
-        val jump = (maxColor - minColor) / (size * 1.0)
+//        val maxColor = 80
+//        val jump = (maxColor - minColor) / (size * 1.0)
+        val jump = 25
         return Color.HSVToColor(
             floatArrayOf(
                 (minColor + (jump * level)).toFloat(), 0.6f, 1.0f
