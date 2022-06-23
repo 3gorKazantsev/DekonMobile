@@ -15,6 +15,7 @@ import com.itextpdf.text.pdf.BaseFont
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Matrix
 import org.egorkazantsev.dekonmobile.domain.model.Model
@@ -76,32 +77,39 @@ class GraphViewModel @Inject constructor(
 
     // сохранение PDF файла
     fun createPDF(fileName: String, graphBmp: Bitmap) {
-        val contentResolver = getApplication<Application?>().contentResolver
+        viewModelScope.launch {
 
-        val values = ContentValues()
-        values.apply {
-            put(DISPLAY_NAME, createProperName(fileName))
-            put(MIME_TYPE, "application/pdf")
-            put(RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Dekon")
-        }
+            val contentResolver = getApplication<Application?>().contentResolver
 
-        val uri: Uri? = contentResolver
-            .insert(MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), values)
-
-        if (uri != null) {
-            _fileUriLiveData.value = uri!!
-            val outputStream = contentResolver.openOutputStream(uri)
-            val document = Document()
-            PdfWriter.getInstance(document, outputStream)
-            document.apply {
-                open()
-                addAuthor("DekonMobile")
-                inflatePDF(document, graphBmp)
-                close()
+            val values = ContentValues()
+            values.apply {
+                put(DISPLAY_NAME, createProperName(fileName))
+                put(MIME_TYPE, "application/pdf")
+                put(RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Dekon")
             }
 
-            Toast.makeText(getApplication(), "PDF created in Documents/Dekon", Toast.LENGTH_SHORT)
-                .show()
+            val uri: Uri? = contentResolver
+                .insert(MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), values)
+
+            if (uri != null) {
+                _fileUriLiveData.value = uri!!
+                val outputStream = contentResolver.openOutputStream(uri)
+                val document = Document()
+                PdfWriter.getInstance(document, outputStream)
+                document.apply {
+                    open()
+                    addAuthor("DekonMobile")
+                    inflatePDF(document, graphBmp)
+                    close()
+                }
+
+                Toast.makeText(
+                    getApplication(),
+                    "PDF created in Documents/Dekon",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
         }
     }
 

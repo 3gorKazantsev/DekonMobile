@@ -12,12 +12,14 @@ import androidx.core.net.toFile
 import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentGraphBinding
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.GraphViewModel
@@ -97,7 +99,8 @@ class GraphFragment : Fragment() {
                         }
                         startActivity(shareIntent)
                     } else {
-                        Toast.makeText(requireContext(), "Файл еще не сохранен", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Файл еще не сохранен", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -162,6 +165,10 @@ class GraphFragment : Fragment() {
 
     private fun onStoragePermissionGranted() {
         // формирование pdf файла и его сохранение
+        createPdf()
+    }
+
+    private fun createPdf() {
         val bmp = binding.graphLineChart.drawToBitmap()
         viewModel.model.value?.let { viewModel.createPDF(it.name, bmp) }
     }
