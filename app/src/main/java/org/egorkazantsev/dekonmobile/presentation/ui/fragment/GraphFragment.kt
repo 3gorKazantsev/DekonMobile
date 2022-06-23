@@ -1,10 +1,16 @@
 package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.Manifest
+import android.Manifest.permission.*
+import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.mikephil.charting.data.Entry
@@ -17,6 +23,8 @@ import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentGraphBinding
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.GraphViewModel
 
+const val PERMISSION_REQUEST_STORAGE = 0
+
 @AndroidEntryPoint
 class GraphFragment : Fragment() {
 
@@ -24,6 +32,11 @@ class GraphFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: GraphViewModel by viewModels()
+
+    private val requestStoragePermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions(),
+        ::onGotStoragePermissionResult
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,9 +78,10 @@ class GraphFragment : Fragment() {
         if (viewModel.currentCriteriaValue.value != null && viewModel.currentMatrixValue.value != null) {
             when (item.itemId) {
                 R.id.saveGraph -> {
-                    // формирование pdf файла и его сохранение
-                    val bmp = createBmp(binding.graphLineChart)
-                    viewModel.model.value?.let { viewModel.createPDF(it.name, bmp) }
+                    // проверка разрешений и запуск функций, если они есть
+                    requestStoragePermissionLauncher.launch(
+                        arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
+                    )
                 }
             }
         } else
@@ -79,13 +93,6 @@ class GraphFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun createBmp(v: View): Bitmap {
-        val bmp = Bitmap.createBitmap(v.width, v.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bmp)
-        v.draw(canvas)
-        return bmp
     }
 
     // настройка графика
@@ -126,5 +133,19 @@ class GraphFragment : Fragment() {
             else
                 matrixValueTextView.text = "-"
         }
+    }
+
+    private fun onGotStoragePermissionResult(grantedResults: Map<String, Boolean>) {
+        if (grantedResults.all { it.value }) {
+            onStoragePermissionGranted()
+        } else {
+            Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun onStoragePermissionGranted() {
+        // формирование pdf файла и его сохранение
+        val bmp = binding.graphLineChart.drawToBitmap()
+        viewModel.model.value?.let { viewModel.createPDF(it.name, bmp) }
     }
 }

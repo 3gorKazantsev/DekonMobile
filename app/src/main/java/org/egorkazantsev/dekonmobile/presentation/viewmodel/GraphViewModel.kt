@@ -1,32 +1,43 @@
 package org.egorkazantsev.dekonmobile.presentation.viewmodel
 
+import android.Manifest
+import android.app.Application
+import android.content.ContentValues
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Typeface
-import android.graphics.pdf.PdfDocument
+import android.net.Uri
+import android.os.Build
 import android.os.Environment
-import android.util.Log
+import android.provider.MediaStore
+import android.provider.MediaStore.MediaColumns.*
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.*
 import com.github.mikephil.charting.data.Entry
+import com.itextpdf.text.Document
+import com.itextpdf.text.Image
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.PdfWriter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.usecase.GetCriteriaByIdUC
 import org.egorkazantsev.dekonmobile.domain.usecase.GetModelByIdUC
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @HiltViewModel
 class GraphViewModel @Inject constructor(
+    application: Application,
+    state: SavedStateHandle,
     private val getModelByIdUC: GetModelByIdUC,
-    private val getCriteriaByIdUC: GetCriteriaByIdUC,
-    state: SavedStateHandle
-) : ViewModel() {
+    private val getCriteriaByIdUC: GetCriteriaByIdUC
+) : AndroidViewModel(application) {
 
     private val _modelLiveData = MutableLiveData<Model>()
     val model: LiveData<Model> = _modelLiveData
@@ -65,41 +76,46 @@ class GraphViewModel @Inject constructor(
         _currentMatrixValueLiveData.value = matrix
     }
 
-    // формирование pfd документа
-    fun createPDF(name: String, graphBmp: Bitmap) {
-        val paint = Paint()
-        val text = Paint().apply {
-            textSize = 15f
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            color = Color.BLACK
-            textAlign = Paint.Align.LEFT
-        }
-        val pdfDoc = PdfDocument()
+    // сохранение PDF файла
+    fun createPDF(fileName: String, graphBmp: Bitmap) {
+        val contentResolver = getApplication<Application?>().contentResolver
 
-        val page1Info = PdfDocument.PageInfo.Builder(graphBmp.width, graphBmp.height, 1).create()
-        val page1 = pdfDoc.startPage(page1Info)
-        val canvas = page1.canvas
-        canvas.drawBitmap(graphBmp, 1f, 1f, paint)
-        pdfDoc.finishPage(page1)
-
-        // todo сделать вторую страницу, где список всех элементов
-
-        val storageState = Environment.getExternalStorageState()
-        if (Environment.MEDIA_MOUNTED != storageState)
-            return
-
-        val fileName = createProperName(name)
-        val file = File(Environment.getExternalStorageDirectory().path + "/Download/$fileName")
-
-        try {
-            pdfDoc.writeTo(FileOutputStream(file))
-            Log.d("DDDebug", "success")
-        } catch (e: IOException) {
-            e.printStackTrace()
-//                Toast.makeText(context, "Что-то пошло не так", Toast.LENGTH_SHORT).show()
+        val values = ContentValues()
+        values.apply {
+            put(DISPLAY_NAME, createProperName(fileName))
+            put(MIME_TYPE, "application/pdf")
+            put(RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Dekon")
         }
 
-        pdfDoc.close()
+        val uri: Uri? = contentResolver
+            .insert(MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), values)
+
+        if (uri != null) {
+            val outputStream = contentResolver.openOutputStream(uri)
+            val document = Document()
+            PdfWriter.getInstance(document, outputStream)
+            document.apply {
+                open()
+                addAuthor("DekonMobile")
+                inflatePDF(document, graphBmp)
+                close()
+            }
+
+            Toast.makeText(getApplication(), "PDF created in Documents/Dekon", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    // наполнение PDF файла
+    private fun inflatePDF(document: Document, graphBmp: Bitmap) {
+        val paragraph = Paragraph()
+        paragraph.add(Paragraph("DekonMobile"))
+        paragraph.add(Paragraph("another text"))
+        val stream = ByteArrayOutputStream()
+        graphBmp.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        val image = stream.toByteArray()
+        paragraph.add(Image.getInstance(image))
+        document.add(paragraph)
     }
 
     private fun createProperName(name: String): String {
@@ -120,7 +136,12 @@ class GraphViewModel @Inject constructor(
         _dataSetLiveData.value = arrayListOf()
         _dataSetLiveData.value?.apply {
             for (i in 0..9) {
-                add(Entry(i.toFloat(), org.egorkazantsev.dekonmobile.data.storage.random().toFloat()))
+                add(
+                    Entry(
+                        i.toFloat(),
+                        org.egorkazantsev.dekonmobile.data.storage.random().toFloat()
+                    )
+                )
             }
         }
     }
