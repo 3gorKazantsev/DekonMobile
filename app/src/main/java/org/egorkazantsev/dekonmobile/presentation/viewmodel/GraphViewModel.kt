@@ -1,35 +1,31 @@
 package org.egorkazantsev.dekonmobile.presentation.viewmodel
 
-import android.Manifest
 import android.app.Application
 import android.content.ContentValues
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.MediaColumns.*
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.lifecycle.*
 import com.github.mikephil.charting.data.Entry
-import com.itextpdf.text.Document
-import com.itextpdf.text.Image
-import com.itextpdf.text.Paragraph
+import com.itextpdf.text.*
+import com.itextpdf.text.pdf.BaseFont
+import com.itextpdf.text.pdf.PdfPCell
+import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.egorkazantsev.dekonmobile.domain.model.Criteria
+import org.egorkazantsev.dekonmobile.domain.model.Matrix
 import org.egorkazantsev.dekonmobile.domain.model.Model
 import org.egorkazantsev.dekonmobile.domain.usecase.GetCriteriaByIdUC
 import org.egorkazantsev.dekonmobile.domain.usecase.GetModelByIdUC
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
+
+private const val FONT = "/assets/fonts/arialmt.ttf"
 
 @HiltViewModel
 class GraphViewModel @Inject constructor(
@@ -108,14 +104,44 @@ class GraphViewModel @Inject constructor(
 
     // наполнение PDF файла
     private fun inflatePDF(document: Document, graphBmp: Bitmap) {
-        val paragraph = Paragraph()
-        paragraph.add(Paragraph("DekonMobile"))
-        paragraph.add(Paragraph("another text"))
+        val baseFont = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+        val fontTitle = Font(baseFont, 24f, Font.NORMAL)
+        val fontSubtitle = Font(baseFont, 16f, Font.NORMAL)
+        val fontMatrix = Font(baseFont, 14f, Font.BOLD)
+        val fontCriteria = Font(baseFont, 14f, Font.NORMAL)
+
+        val paraTitle = Paragraph("Матрица: ${model.value!!.name}\n" +
+                "Критерий: ${criteria.value!!.name}\n\n", fontTitle)
+
+        val tableDesc = Paragraph("Таблица элементов модели (матриц и критериев) и их значений\n\n", fontSubtitle)
+        val table = PdfPTable(2)
+        table.setWidths(floatArrayOf(230f, 20f))
+        for (element in model.value!!.root.elements) {
+            if (element is Matrix) {
+                table.addCell(Phrase(element.name, fontMatrix))
+                table.addCell(Phrase(element.value.toString(), fontMatrix))
+            } else {
+                table.addCell(Phrase(element.name, fontCriteria))
+                table.addCell(Phrase(element.value.toString(), fontCriteria))
+            }
+        }
+
         val stream = ByteArrayOutputStream()
         graphBmp.compress(Bitmap.CompressFormat.PNG, 90, stream)
-        val image = stream.toByteArray()
-        paragraph.add(Image.getInstance(image))
-        document.add(paragraph)
+        val image = Image.getInstance(stream.toByteArray())
+
+        val documentWidth: Float =
+            document.pageSize.width - document.leftMargin() - document.rightMargin()
+        val documentHeight: Float =
+            document.pageSize.height - document.topMargin() - document.bottomMargin()
+        image.scaleToFit(documentWidth, documentHeight)
+
+        document.apply {
+            add(paraTitle)
+            add(tableDesc)
+            add(table)
+            add(image)
+        }
     }
 
     private fun createProperName(name: String): String {
