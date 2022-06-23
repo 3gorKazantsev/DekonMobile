@@ -12,7 +12,6 @@ import androidx.lifecycle.*
 import com.github.mikephil.charting.data.Entry
 import com.itextpdf.text.*
 import com.itextpdf.text.pdf.BaseFont
-import com.itextpdf.text.pdf.PdfPCell
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,6 +48,9 @@ class GraphViewModel @Inject constructor(
 
     private val _currentMatrixValueLiveData = MutableLiveData<Float?>()
     val currentMatrixValue: LiveData<Float?> = _currentMatrixValueLiveData
+
+    private val _fileUriLiveData = MutableLiveData<Uri>()
+    val fileUri: LiveData<Uri> = _fileUriLiveData
 
     init {
         // загружаем модель и критерий
@@ -87,6 +89,7 @@ class GraphViewModel @Inject constructor(
             .insert(MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), values)
 
         if (uri != null) {
+            _fileUriLiveData.value = uri!!
             val outputStream = contentResolver.openOutputStream(uri)
             val document = Document()
             PdfWriter.getInstance(document, outputStream)
@@ -110,10 +113,15 @@ class GraphViewModel @Inject constructor(
         val fontMatrix = Font(baseFont, 14f, Font.BOLD)
         val fontCriteria = Font(baseFont, 14f, Font.NORMAL)
 
-        val paraTitle = Paragraph("Матрица: ${model.value!!.name}\n" +
-                "Критерий: ${criteria.value!!.name}\n\n", fontTitle)
+        val paraTitle = Paragraph(
+            "Матрица: ${model.value!!.name}\n" +
+                    "Критерий: ${criteria.value!!.name}\n\n", fontTitle
+        )
 
-        val tableDesc = Paragraph("Таблица элементов модели (матриц и критериев) и их значений\n\n", fontSubtitle)
+        val tableDesc = Paragraph(
+            "Таблица элементов модели (матриц и критериев) и их значений\n\n",
+            fontSubtitle
+        )
         val table = PdfPTable(2)
         table.setWidths(floatArrayOf(230f, 20f))
         for (element in model.value!!.root.elements) {
@@ -145,7 +153,7 @@ class GraphViewModel @Inject constructor(
     }
 
     private fun createProperName(name: String): String {
-        return "${name.replace(Regex("[^0-9a-zA-Zа-яёА-ЯЁ]+"), "_")}.pdf"
+        return "${name.replace(Regex("[^0-9a-zA-Zа-яёА-ЯЁ]+"), "_")}_${crutchForFileName()}.pdf"
     }
 
     private fun loadModelById(id: UUID) {
@@ -170,5 +178,10 @@ class GraphViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    private fun crutchForFileName(): String {
+        val uuid = UUID.randomUUID().toString()
+        return uuid.substringBefore('-')
     }
 }

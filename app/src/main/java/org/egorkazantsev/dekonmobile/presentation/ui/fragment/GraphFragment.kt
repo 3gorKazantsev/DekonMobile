@@ -1,15 +1,14 @@
 package org.egorkazantsev.dekonmobile.presentation.ui.fragment
 
-import android.Manifest
 import android.Manifest.permission.*
-import android.app.AlertDialog
-import android.content.pm.PackageManager
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,6 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.egorkazantsev.dekonmobile.R
 import org.egorkazantsev.dekonmobile.databinding.FragmentGraphBinding
 import org.egorkazantsev.dekonmobile.presentation.viewmodel.GraphViewModel
+import java.io.File
+import java.net.URI
+import java.util.*
 
 const val PERMISSION_REQUEST_STORAGE = 0
 
@@ -82,6 +84,21 @@ class GraphFragment : Fragment() {
                     requestStoragePermissionLauncher.launch(
                         arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
                     )
+                }
+                R.id.shareGraph -> {
+                    val uri = viewModel.fileUri.value
+
+                    if (uri != null) {
+                        val shareIntent = Intent()
+                        shareIntent.apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            type = "application/pdf"
+                        }
+                        startActivity(shareIntent)
+                    } else {
+                        Toast.makeText(requireContext(), "Файл еще не сохранен", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         } else
